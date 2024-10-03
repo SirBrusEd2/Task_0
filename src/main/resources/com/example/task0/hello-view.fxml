@@ -15,11 +15,11 @@
   <Label text="Введите сумму чека:" />
   <TextField fx:id="inputField" />
 
-  <Button text="Большие чаевые (15%)" onAction="#calculateBigTip" />
+  <Button text="Большие чаевые (15%)" onAction="#handleCalculateBigTip" />
   <Label text="Обычные чаевые (10%-9%) Сколько оставить при обычных чаевых? 10% или 9%"/>
   <TextField fx:id="inputprocentField" />
-  <Button text="Рассчитать" onAction="#calculateNormalTip" />
-  <Button text="Маленькие чаевые (3%)" onAction="#calculateSmallTip" />
+  <Button text="Рассчитать" onAction="#handleCalculateNormalTip" />
+  <Button text="Маленькие чаевые (3%)" onAction="#handleCalculateSmallTip" />
 
   <Label text="Сумма чаевых:" />
   <TextField fx:id="resultField" editable="false" />

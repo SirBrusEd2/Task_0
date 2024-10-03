@@ -5,49 +5,41 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class HelloController {
-    @FXML
-    private TextField inputField;
-    @FXML
-    private TextField inputprocentField;
-    @FXML
-    private TextField resultField;
-    @FXML
-    private TextField totalField; // Для отображения полной суммы
 
     @FXML
-    private void calculateBigTip() {
-        calculateTip(15);
+    private TextField inputField; // Поле для ввода суммы
+    @FXML
+    private TextField inputprocentField; // Поле для ввода процента
+    @FXML
+    private TextField resultField; // Поле для отображения результата
+    @FXML
+    private TextField totalField; // Поле для отображения полной суммы
+
+    private Calcilator_Task0 calculator;
+
+    // Инициализация контроллера
+    @FXML
+    public void initialize() {
+        calculator = new Calcilator_Task0();
+        // Передаем ссылки на TextField в калькулятор
+        calculator.setInputField(inputField);
+        calculator.setInputProcentField(inputprocentField);
+        calculator.setResultField(resultField);
+        calculator.setTotalField(totalField);
     }
 
     @FXML
-    private void calculateNormalTip() {
-        try {
-            double billAmount = Double.parseDouble(inputprocentField.getText());
-            if (billAmount == 10 || billAmount == 9) {
-                calculateTip(billAmount);
-            } else {
-                resultField.setText("Введите один из предложенных вариантов");
-            }
-        } catch (NumberFormatException e) {
-            resultField.setText("Ошибка ввода");
-        }
+    private void handleCalculateBigTip() {
+        calculator.calculateBigTip();
     }
 
     @FXML
-    private void calculateSmallTip() {
-        calculateTip(3);
+    private void handleCalculateNormalTip() {
+        calculator.calculateNormalTip();
     }
 
-    private void calculateTip(double percent) {
-        try {
-            double billAmount = Double.parseDouble(inputField.getText());
-            double tipAmount = billAmount * (percent / 100);
-            double totalAmount = billAmount + tipAmount; // Полная сумма
-            resultField.setText(String.format("%.2f", tipAmount));
-            totalField.setText(String.format("%.2f", totalAmount)); // Обновление поля с полной суммой
-        } catch (NumberFormatException e) {
-            resultField.setText("Ошибка ввода");
-        }
-
+    @FXML
+    private void handleCalculateSmallTip() {
+        calculator.calculateSmallTip();
     }
 }
