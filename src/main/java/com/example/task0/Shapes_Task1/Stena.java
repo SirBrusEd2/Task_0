@@ -3,7 +3,7 @@ package com.example.task0.Shapes_Task1;
 import javafx.scene.paint.Color;
 import javafx.scene.canvas.GraphicsContext;
 
-public class Stena {
+public class Stena extends Figura {
     private double width;
     private double height;
     private double posX;
@@ -16,12 +16,12 @@ public class Stena {
         this.posY = posY;
     }
 
+    @Override
     public void draw(GraphicsContext gc) {
-        gc.setFill(Color.BEIGE); // Устанавливаем цвет заполнения на бежевый
-        gc.fillRect(posX, posY, width, height); // Заполняем стену бежевым цветом
-
-        gc.setStroke(Color.BROWN); // Устанавливаем цвет обводки (можно выбрать любой)
-        gc.setLineWidth(2); // Устанавливаем ширину линии обводки
-        gc.strokeRect(posX, posY, width, height); // Рисуем контур стенки
+        gc.setFill(Color.BEIGE);
+        gc.fillRect(posX, posY, width, height);
+        gc.setStroke(Color.BROWN);
+        gc.setLineWidth(2);
+        gc.strokeRect(posX, posY, width, height);
     }
 }

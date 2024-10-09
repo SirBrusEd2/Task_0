@@ -8,9 +8,11 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.task0.HelloController">
-  <!-- Task0
+  <!-- Task0 -->
+  <!--
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
   </padding>
@@ -30,6 +32,7 @@
       <Label text="Общая сумма с чаевыми:" />
       <TextField fx:id="totalField" editable="false" /> -->
   <!-- Task1 -->
+  <!--
   <Canvas fx:id="canvas" width="600" height="500"/>
 
   <HBox spacing="10" alignment="CENTER">
@@ -40,4 +43,14 @@
     <Button fx:id="buttonZabor" text="Нарисовать забор" onAction="#handleDrawFence"/>
     <Button fx:id="buttonDom" text="Нарисовать дом" onAction="#handleDrawHouse"/>
   </HBox>
+  -->
+  <Label text="0 - круг, 1 - прямая, 2 - угол, 3 - треугольник, 4 - квадрат, 5 - пятиугольник:"/>
+
+  <TextField fx:id="value1" prefWidth="100"/>
+
+  <Label text="Нажмите кнопку для создания фигуры:"/>
+
+  <Button text="Создать фигуру" onAction="#addPikcher"/>
+
+  <Canvas fx:id="can" width="350.0" height="300.0" style="-fx-background-color: lightgrey;"/>
 </VBox>

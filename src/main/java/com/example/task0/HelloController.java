@@ -8,11 +8,14 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.canvas.GraphicsContext;
 import com.example.task0.Shapes_Task1.Stupenki;
+import com.example.task0.Task2_Shape_Factory.Shape;
+import com.example.task0.Task2_Shape_Factory.ShapeFactory;
+import javafx.scene.control.Alert;
 
 
 public class HelloController {
-    /* Task0
-    @FXML
+    /* Task0 */
+    /* @FXML
     private TextField inputField; // Поле для ввода суммы
     @FXML
     private TextField inputprocentField; // Поле для ввода процента
@@ -47,80 +50,129 @@ public class HelloController {
     @FXML
     private void handleCalculateSmallTip() {
         calculator.calculateSmallTip();
-    }*/
+    } */
     /* Task1 */
-
+    /*
     @FXML
     private Canvas canvas;
 
     @FXML
     private void handleDrawRoof() {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
         clearCanvas();
 
-        Krisha krisha = new Krisha(220, 100, (canvas.getWidth() / 2) - 110, 200);
-        krisha.draw(gc);
+        Figura krisha = new Krisha(220, 100, (canvas.getWidth() / 2) - 110, 200);
+        drawFigura(krisha);
     }
 
     @FXML
     private void handleDrawWall() {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
         clearCanvas();
 
-        Stena stena = new Stena(200, 150, (canvas.getWidth() / 2) - 100, 200);
-        stena.draw(gc);
+        Figura stena = new Stena(200, 150, (canvas.getWidth() / 2) - 100, 200);
+        drawFigura(stena);
     }
 
     @FXML
     private void handleDrawWindow() {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
         clearCanvas();
 
-        Okno okno = new Okno(80, 60, (canvas.getWidth() / 2) - 40, 200 + (150 / 4));
-        okno.draw(gc);
+        Figura okno = new Okno(80, 60, (canvas.getWidth() / 2) - 40, 200 + (150 / 4));
+        drawFigura(okno);
     }
 
     @FXML
     private void handleDrawDoor() {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
         clearCanvas();
 
-        Stupenki stupenki = new Stupenki(30, 10, 109, 340, 3);
-        stupenki.draw(gc);
+        Figura stupenki = new Stupenki(30, 10, 109, 340, 3);
+        drawFigura(stupenki);
     }
 
     @FXML
     private void handleDrawFence() {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
         clearCanvas();
 
-        Zabor zabor = new Zabor(60, 100, (canvas.getWidth() / 2) + 100, 250);
-        zabor.draw(gc);
+        Figura zabor = new Zabor(60, 100, (canvas.getWidth() / 2) + 100, 250);
+        drawFigura(zabor);
     }
 
     @FXML
     private void handleDrawHouse() {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
         clearCanvas();
 
-        Stena stena = new Stena(200, 150, (canvas.getWidth() / 2) - 100, 200);
-        stena.draw(gc);
+        Figura stena = new Stena(200, 150, (canvas.getWidth() / 2) - 100, 200);
+        drawFigura(stena);
 
-        Krisha krisha = new Krisha(220, 100, (canvas.getWidth() / 2) - 110, 200);
-        krisha.draw(gc);
+        Figura krisha = new Krisha(220, 100, (canvas.getWidth() / 2) - 110, 200);
+        drawFigura(krisha);
 
-        Okno okno = new Okno(80, 60, (canvas.getWidth() / 2) - 40, 200 + (150 / 4));
-        okno.draw(gc);
+        Figura okno = new Okno(80, 60, (canvas.getWidth() / 2) - 40, 200 + (150 / 4));
+        drawFigura(okno);
 
-        Stupenki stupenki = new Stupenki(30, 10, 109, 340, 3);
-        stupenki.draw(gc);
+        Figura stupenki = new Stupenki(30, 10, 109, 340, 3);
+        drawFigura(stupenki);
 
-        Zabor zabor = new Zabor(60, 100, (canvas.getWidth() / 2) + 100, 250);
-        zabor.draw(gc);
+        Figura zabor = new Zabor(60, 100, (canvas.getWidth() / 2) + 100, 250);
+        drawFigura(zabor);
+    }
+
+    private void drawFigura(Figura figura) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        figura.draw(gc);
     }
 
     private void clearCanvas() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    }*/
+    /* Task2 */
+
+    @FXML
+    private TextField value1; // Поле ввода для числа
+
+    @FXML
+    private Canvas can; // Поле рисования
+
+    public void addPikcher() {
+        GraphicsContext gr = can.getGraphicsContext2D();
+        String inputText = value1.getText();
+
+        if (!checkWithRegExp(inputText) || inputText.equals("")) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Предупреждение: ");
+            alert.setHeaderText(null);
+            alert.setContentText("Введено нечисло или число не из диапазона от 0 до 5!");
+            alert.showAndWait();
+            return;
+        }
+
+        try {
+            int numberOfSides = Integer.parseInt(inputText);
+
+            if (numberOfSides < 0 || numberOfSides > 5) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Предупреждение: ");
+                alert.setHeaderText(null);
+                alert.setContentText("Число должно быть в диапазоне от 0 до 5!");
+                alert.showAndWait();
+                return;
+            }
+
+            ShapeFactory shapeFactory = new ShapeFactory();
+            Shape shape1 = shapeFactory.createShape(numberOfSides);
+
+            gr.clearRect(0, 0, can.getWidth(), can.getHeight());
+            shape1.draw(gr);
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Ошибка: ");
+            alert.setHeaderText(null);
+            alert.setContentText("Ошибка при преобразовании числа!");
+            alert.showAndWait();
+        }
+    }
+
+    private boolean checkWithRegExp(String input) {
+        return input.matches("\\d");
     }
 }
